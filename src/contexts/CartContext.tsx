@@ -121,7 +121,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     
     toast({
       title: "Discount applied",
-      description: `${discountCode.type === 'percentage' ? discountCode.value + '%' : '$' + discountCode.value} discount applied to your bill.`,
+      description: `${discountCode.type === 'percentage' ? discountCode.value + '%' : '₹' + discountCode.value} discount applied to your bill.`,
     });
     
     return true;
@@ -143,22 +143,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
 
     const billItems = items.map(item => 
-      `${item.quantity}x ${item.name} - $${(item.price * item.quantity).toFixed(2)}`
+      `${item.quantity}x ${item.name} - ₹${(item.price * item.quantity).toFixed(2)}`
     ).join('\n');
 
-    const discountLine = discount > 0 ? `Discount (${discountCode}): -$${discount.toFixed(2)}` : '';
+    const discountLine = discount > 0 ? `Discount (${discountCode}): -₹${discount.toFixed(2)}` : '';
     
     const billMessage = `
-*Coffee Shop Bill for ${customer.name}*
+*Dine Ease Bill for ${customer.name}*
 ---------------------------
 ${billItems}
 ---------------------------
-Subtotal: $${subtotal.toFixed(2)}
+Subtotal: ₹${subtotal.toFixed(2)}
 ${discountLine}
-${discountLine ? `Subtotal after discount: $${(subtotal - discount).toFixed(2)}\n` : ''}Tax (8%): $${tax.toFixed(2)}
-*Total: $${total.toFixed(2)}*
+${discountLine ? `Subtotal after discount: ₹${(subtotal - discount).toFixed(2)}\n` : ''}Tax (8%): ₹${tax.toFixed(2)}
+*Total: ₹${total.toFixed(2)}*
 
-Thank you for visiting our coffee shop!
+Thank you for visiting!
     `.trim();
 
     return `https://wa.me/${formattedPhone}?text=${encodeURIComponent(billMessage)}`;
@@ -177,7 +177,7 @@ Thank you for visiting our coffee shop!
     const receiptContent = document.createElement('div');
     receiptContent.innerHTML = `
       <div style="font-family: monospace; width: 300px; padding: 20px;">
-        <h2 style="text-align: center;">Coffee Shop</h2>
+        <h2 style="text-align: center;">Dine Ease Bill</h2>
         <p style="text-align: center;">Receipt</p>
         <p>Date: ${new Date().toLocaleString()}</p>
         ${customer.name ? `<p>Customer: ${customer.name}</p>` : ''}
@@ -196,8 +196,8 @@ Thank you for visiting our coffee shop!
               <tr>
                 <td style="text-align: left;">${item.name}</td>
                 <td style="text-align: right;">${item.quantity}</td>
-                <td style="text-align: right;">$${item.price.toFixed(2)}</td>
-                <td style="text-align: right;">$${(item.price * item.quantity).toFixed(2)}</td>
+                <td style="text-align: right;">₹${item.price.toFixed(2)}</td>
+                <td style="text-align: right;">₹${(item.price * item.quantity).toFixed(2)}</td>
               </tr>
             `).join('')}
           </tbody>
@@ -205,21 +205,21 @@ Thank you for visiting our coffee shop!
         <hr/>
         <p style="display: flex; justify-content: space-between;">
           <span>Subtotal:</span>
-          <span>$${subtotal.toFixed(2)}</span>
+          <span>₹${subtotal.toFixed(2)}</span>
         </p>
         ${discount > 0 ? `
           <p style="display: flex; justify-content: space-between;">
             <span>Discount (${discountCode}):</span>
-            <span>-$${discount.toFixed(2)}</span>
+            <span>-₹${discount.toFixed(2)}</span>
           </p>
         ` : ''}
         <p style="display: flex; justify-content: space-between;">
           <span>Tax (8%):</span>
-          <span>$${tax.toFixed(2)}</span>
+          <span>₹${tax.toFixed(2)}</span>
         </p>
         <p style="display: flex; justify-content: space-between; font-weight: bold;">
           <span>Total:</span>
-          <span>$${total.toFixed(2)}</span>
+          <span>₹${total.toFixed(2)}</span>
         </p>
         <hr/>
         <p style="text-align: center;">Thank you for your visit!</p>

@@ -16,7 +16,7 @@ const MenuItem = ({ item }: MenuItemProps) => {
     <div className="flex items-center justify-between p-4 border rounded-lg shadow-sm bg-white">
       <div>
         <h3 className="font-medium">{item.name}</h3>
-        <p className="text-sm text-gray-500">${item.price.toFixed(2)}</p>
+        <p className="text-sm text-gray-500">₹{item.price.toFixed(2)}</p>
       </div>
       <Button
         size="sm"

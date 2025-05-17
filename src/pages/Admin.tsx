@@ -19,7 +19,7 @@ const Admin = () => {
             <ThemeToggle />
           </div>
           
-          <h1 className="text-3xl font-bold text-foreground">Coffee Shop Admin</h1>
+          <h1 className="text-3xl font-bold text-foreground">Dine Ease Bill - Admin</h1>
           <NavigationMenu className="my-4">
             <NavigationMenuList>
               <NavigationMenuItem>

@@ -25,7 +25,7 @@ const Index = () => {
                 </Button>
               </Link>
             </div>
-            <h1 className="text-3xl font-bold text-foreground">Coffee Shop Billing System</h1>
+            <h1 className="text-3xl font-bold text-foreground">Dine Ease Bill</h1>
             <p className="text-muted-foreground">Select items to add to the bill</p>
           </header>
           
