@@ -6,15 +6,20 @@ import OrderAnalysis from '@/components/admin/OrderAnalysis';
 import UserManagement from '@/components/admin/UserManagement';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('menu');
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-background py-8">
       <div className="container mx-auto px-4">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold">Coffee Shop Admin</h1>
+        <header className="mb-8 relative">
+          <div className="absolute right-0 top-0">
+            <ThemeToggle />
+          </div>
+          
+          <h1 className="text-3xl font-bold text-foreground">Coffee Shop Admin</h1>
           <NavigationMenu className="my-4">
             <NavigationMenuList>
               <NavigationMenuItem>

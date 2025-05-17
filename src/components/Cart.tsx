@@ -1,9 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCart } from '../contexts/CartContext';
-import { Trash, Send, Plus, Minus } from 'lucide-react';
+import { Trash, Send, Plus, Minus, Printer, Tag } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Customer } from '@/types';
 
@@ -15,14 +15,25 @@ const Cart = () => {
     removeFromCart, 
     updateQuantity, 
     subtotal, 
-    tax, 
+    tax,
+    discount,
     total,
-    generateWhatsAppLink 
+    generateWhatsAppLink,
+    applyDiscount,
+    printReceipt
   } = useCart();
+
+  const [discountInputCode, setDiscountInputCode] = useState('');
 
   const handleCustomerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCustomer({ ...customer, [name]: value });
+  };
+
+  const handleApplyDiscount = () => {
+    if (discountInputCode.trim()) {
+      applyDiscount(discountInputCode);
+    }
   };
 
   const handleSendToWhatsApp = () => {
@@ -78,11 +89,34 @@ const Cart = () => {
         </div>
       )}
       
+      {items.length > 0 && (
+        <div className="space-y-3 mb-4">
+          <div className="flex gap-2">
+            <Input
+              value={discountInputCode}
+              onChange={(e) => setDiscountInputCode(e.target.value)}
+              placeholder="Discount code"
+              className="flex-1"
+            />
+            <Button onClick={handleApplyDiscount}>
+              <Tag className="mr-2 h-4 w-4" />
+              Apply
+            </Button>
+          </div>
+        </div>
+      )}
+      
       <div className="space-y-2 border-t pt-4">
         <div className="flex justify-between">
           <span>Subtotal</span>
           <span>${subtotal.toFixed(2)}</span>
         </div>
+        {discount > 0 && (
+          <div className="flex justify-between text-green-600">
+            <span>Discount</span>
+            <span>-${discount.toFixed(2)}</span>
+          </div>
+        )}
         <div className="flex justify-between">
           <span>Tax (8%)</span>
           <span>${tax.toFixed(2)}</span>
@@ -123,6 +157,16 @@ const Cart = () => {
         >
           <Send className="mr-2 h-4 w-4" />
           Send to WhatsApp
+        </Button>
+
+        <Button 
+          variant="secondary" 
+          className="w-full" 
+          onClick={printReceipt}
+          disabled={items.length === 0}
+        >
+          <Printer className="mr-2 h-4 w-4" />
+          Print Receipt
         </Button>
       </div>
     </div>
