@@ -5,13 +5,22 @@ import MenuList from '../components/MenuList';
 import Cart from '../components/Cart';
 import { menuItems } from '../data/menu';
 import { Toaster } from '@/components/ui/toaster';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { Settings } from 'lucide-react';
 
 const Index = () => {
   return (
     <CartProvider>
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="container mx-auto px-4">
-          <header className="mb-8 text-center">
+          <header className="mb-8 text-center relative">
+            <Link to="/admin" className="absolute right-0 top-0">
+              <Button variant="outline" size="sm">
+                <Settings className="h-4 w-4 mr-2" />
+                Admin
+              </Button>
+            </Link>
             <h1 className="text-3xl font-bold">Coffee Shop Billing System</h1>
             <p className="text-gray-500">Select items to add to the bill</p>
           </header>
