@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext } from 'react';
 import { CartItem, MenuItem, Customer } from '../types';
 import { useToast } from '@/components/ui/use-toast';
@@ -18,7 +17,7 @@ interface CartContextType {
   subtotal: number;
   tax: number;
   total: number;
-  generateWhatsAppLink: () => string;
+  generateWhatsAppLink: () => Promise<string>; // Updated to Promise<string>
   printReceipt: () => void;
   printKOT: () => void;
 }

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -25,6 +24,7 @@ const Cart = () => {
   } = useCart();
 
   const [discountInputCode, setDiscountInputCode] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCustomerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -37,10 +37,17 @@ const Cart = () => {
     }
   };
 
-  const handleSendToWhatsApp = () => {
-    const whatsappLink = generateWhatsAppLink();
-    if (whatsappLink) {
-      window.open(whatsappLink, '_blank');
+  const handleSendToWhatsApp = async () => {
+    setIsLoading(true);
+    try {
+      const whatsappLink = await generateWhatsAppLink();
+      if (whatsappLink) {
+        window.open(whatsappLink, '_blank');
+      }
+    } catch (error) {
+      console.error("Error sending to WhatsApp:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -176,10 +183,10 @@ const Cart = () => {
         <Button 
           className="w-full" 
           onClick={handleSendToWhatsApp}
-          disabled={items.length === 0 || !customer.phone}
+          disabled={items.length === 0 || !customer.phone || isLoading}
         >
           <Send className="mr-2 h-4 w-4" />
-          Send to WhatsApp
+          {isLoading ? 'Generating...' : 'Send to WhatsApp'}
         </Button>
       </div>
     </div>
