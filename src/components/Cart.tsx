@@ -20,7 +20,8 @@ const Cart = () => {
     total,
     generateWhatsAppLink,
     applyDiscount,
-    printReceipt
+    printReceipt,
+    printKOT
   } = useCart();
 
   const [discountInputCode, setDiscountInputCode] = useState('');
@@ -150,6 +151,28 @@ const Cart = () => {
           />
         </div>
         
+        <div className="flex gap-2 mb-2">
+          <Button 
+            variant="secondary" 
+            className="flex-1" 
+            onClick={printKOT}
+            disabled={items.length === 0}
+          >
+            <Printer className="mr-2 h-4 w-4" />
+            Print KOT
+          </Button>
+          
+          <Button 
+            variant="secondary" 
+            className="flex-1" 
+            onClick={printReceipt}
+            disabled={items.length === 0}
+          >
+            <Printer className="mr-2 h-4 w-4" />
+            Print Bill
+          </Button>
+        </div>
+
         <Button 
           className="w-full" 
           onClick={handleSendToWhatsApp}
@@ -157,16 +180,6 @@ const Cart = () => {
         >
           <Send className="mr-2 h-4 w-4" />
           Send to WhatsApp
-        </Button>
-
-        <Button 
-          variant="secondary" 
-          className="w-full" 
-          onClick={printReceipt}
-          disabled={items.length === 0}
-        >
-          <Printer className="mr-2 h-4 w-4" />
-          Print Receipt
         </Button>
       </div>
     </div>
