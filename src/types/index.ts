@@ -59,4 +59,5 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
+  whatsapp?: string; // Added WhatsApp number field
 }
