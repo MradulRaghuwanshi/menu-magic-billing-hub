@@ -57,7 +57,7 @@ const OrderAnalysis = () => {
             <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${stats.totalRevenue.toFixed(2)}</div>
+            <div className="text-2xl font-bold">₹{stats.totalRevenue.toFixed(2)}</div>
           </CardContent>
         </Card>
         <Card>
@@ -65,7 +65,7 @@ const OrderAnalysis = () => {
             <CardTitle className="text-sm font-medium">Avg. Order Value</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${stats.averageOrderValue.toFixed(2)}</div>
+            <div className="text-2xl font-bold">₹{stats.averageOrderValue.toFixed(2)}</div>
           </CardContent>
         </Card>
       </div>
@@ -92,7 +92,7 @@ const OrderAnalysis = () => {
                     <YAxis />
                     <Tooltip content={<CustomTooltip />} />
                     <Legend />
-                    <Bar dataKey="amount" name="Sales ($)" fill="#4F46E5" />
+                    <Bar dataKey="amount" name="Sales (₹)" fill="#4F46E5" />
                   </BarChart>
                 </ResponsiveContainer>
               </ChartContainer>
@@ -186,7 +186,7 @@ const CustomTooltip = ({ active, payload, nameKey = "date", valueLabel = "Sales"
     return (
       <div className="bg-white p-2 border rounded shadow-sm">
         <p className="font-medium">{name}</p>
-        <p>{valueLabel}: ${typeof value === 'number' ? value.toFixed(2) : value}</p>
+        <p>{valueLabel}: {valueLabel === "Orders" ? value : `₹${typeof value === 'number' ? value.toFixed(2) : value}`}</p>
       </div>
     );
   }
