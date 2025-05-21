@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -52,7 +53,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="border rounded-lg p-4 bg-white shadow-sm">
+    <div className="border rounded-lg p-4 bg-purple-50 shadow-sm">
       <h2 className="text-xl font-semibold mb-4">Current Bill</h2>
       
       {items.length === 0 ? (
@@ -181,7 +182,7 @@ const Cart = () => {
         </div>
 
         <Button 
-          className="w-full" 
+          className="w-full bg-green-600 hover:bg-green-700" 
           onClick={handleSendToWhatsApp}
           disabled={items.length === 0 || !customer.phone || isLoading}
         >

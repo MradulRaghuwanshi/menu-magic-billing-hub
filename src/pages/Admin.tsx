@@ -7,6 +7,8 @@ import UserManagement from '@/components/admin/UserManagement';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
 import { ThemeToggle } from '../components/ThemeToggle';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('menu');
@@ -23,8 +25,11 @@ const Admin = () => {
           <NavigationMenu className="my-4">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link to="/" className={navigationMenuTriggerStyle()}>
-                  Back to Billing
+                <Link to="/">
+                  <Button variant="default" className="bg-purple-600 hover:bg-purple-700">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Billing
+                  </Button>
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
